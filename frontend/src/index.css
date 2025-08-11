@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+/* Simple CSS to approximate WhatsApp Web layout */
+* { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+html,body,#root { height: 100%; margin: 0; padding: 0; }
+/*  
+
+.app {
+  height: 100vh;
+  display: flex;
+  background: #e5ddd5;
+}
+
+/* Left column: chats */
+.sidebar {
+  width: 360px;
+  max-width: 40%;
+  background: #f8f9fa;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.search {
+  padding: 12px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.search input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+}
+
+/* Chat list items */
+.chat-list {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.chat-item {
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.chat-item:hover { background: #f1f3f5; }
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  background: #7b8a8b;
+  color: white;
+  border-radius: 50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+}
+
+/* Right column: chat window */
+.chat-window {
+  flex: 1;
+  display:flex;
+  flex-direction:column;
+  min-width: 0;
+}
+
+.header {
+  padding: 12px 16px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.messages {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+  background-image: linear-gradient(180deg, #e5ddd5 0%, #e5ddd5 100%);
+}
+
+/* message bubbles */
+.message-row { display:flex; margin-bottom: 10px; align-items: flex-end; }
+.message-row.me { justify-content: flex-end; }
+.bubble {
+  max-width: 70%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: white;
+  color: #111;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  font-size: 14px;
+}
+.bubble.me { background: #dcf8c6; }
+.meta {
+  font-size: 11px;
+  color: #666;
+  margin-top: 6px;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:flex-end;
+}
+
+/* input area */
+.composer {
+  padding: 10px;
+  background: #f6f6f6;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  border-top: 1px solid #ddd;
+}
+.composer input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+}
+.send-btn {
+  padding: 8px 14px;
+  border-radius: 18px;
+  background: #25d366;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .sidebar { width: 320px; position: absolute; z-index: 10; left: 0; top: 0; bottom: 0; transform: translateX(0); }
+  .chat-window { width: 100%; }
+}

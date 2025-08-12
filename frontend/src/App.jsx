@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import ChatWindow from "./components/ChatWindow";
 
-const API = "http://localhost:5000";
+// const API = "http://localhost:5000";
+const API = "https://whatsapp-web-clone-api.onrender.com";
 
 export default function App() {
   const [chats, setChats] = useState([]);

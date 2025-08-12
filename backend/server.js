@@ -10,7 +10,7 @@ const sendRoutes = require("./routes/send.js");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 const MONGO_URI = process.env.MONGO_URI;

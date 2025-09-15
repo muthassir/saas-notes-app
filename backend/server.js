@@ -1,32 +1,57 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+// require('dotenv').config();
+// const express = require('express');
+// const cors = require('cors');
+// const connectDB = require('./config/db.js');
 
-const webhookRoutes = require("./routes/webhook.js");
-const messagesRoutes = require("./routes/messages.js");
-const chatsRoutes = require("./routes/chats.js");
-const sendRoutes = require("./routes/send.js");
+// const authRoutes = require('./routes/auth.js');
+// const tenantRoutes = require('./routes/tenants.js');
+// const noteRoutes = require('./routes/notes.js');
+
+// const app = express();
+// connectDB();
+
+// app.use(cors());
+// app.use(express.json());
+
+// // Routes
+// app.use('/auth', authRoutes);
+// app.use('/tenants', tenantRoutes);
+// app.use('/notes', noteRoutes);
+
+// // Health
+// app.get('/health', (req, res) => res.json({ status: 'ok' }));
+
+// const PORT = process.env.PORT || 3001;
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+
+
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
+
+const authRoutes = require('./routes/auth.js');
+const noteRoutes = require('./routes/notes.js');
+const tenantRoutes = require('./routes/tenants.js');
 
 const app = express();
 
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
 
-const MONGO_URI = process.env.MONGO_URI;
+app.use('/auth', authRoutes);
+app.use('/notes', noteRoutes);
+app.use('/tenants', tenantRoutes);
 
-mongoose
-  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB connected ->", MONGO_URI))
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-    process.exit(1);
-  });
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
-app.use("/webhook", webhookRoutes);
-app.use("/messages", messagesRoutes);
-app.use("/chats", chatsRoutes);
-app.use("/send", sendRoutes);
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('MongoDB connected');
+    app.listen(process.env.PORT || 3001, () =>
+      console.log(`Server running on port ${process.env.PORT || 3001}`)
+    );
+  })
+  .catch(err => console.error(err));

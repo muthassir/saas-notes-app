@@ -1,38 +1,3 @@
-// require('dotenv').config();
-// const mongoose = require('mongoose');
-// const bcrypt = require('bcryptjs');
-
-// const connectDB = require('./config/db.js');
-// const Tenant = require('./models/Tenant.js');
-// const User = require('./models/User.js');
-
-// const seed = async () => {
-//   await connectDB();
-
-//   // Clear old data
-//   await Tenant.deleteMany({});
-//   await User.deleteMany({});
-
-//   // Create tenants
-//   const acme = await Tenant.create({ name: 'Acme', slug: 'acme', plan: 'free' });
-//   const globex = await Tenant.create({ name: 'Globex', slug: 'globex', plan: 'free' });
-
-//   // Password hash
-//   const passwordHash = await bcrypt.hash('password', 10);
-
-//   // Create users
-//   await User.create([
-//     { email: 'admin@acme.test', password: passwordHash, role: 'admin', tenant: acme._id },
-//     { email: 'user@acme.test', password: passwordHash, role: 'member', tenant: acme._id },
-//     { email: 'admin@globex.test', password: passwordHash, role: 'admin', tenant: globex._id },
-//     { email: 'user@globex.test', password: passwordHash, role: 'member', tenant: globex._id }
-//   ]);
-
-//   console.log('✅ Database seeded with tenants and users');
-//   mongoose.disconnect();
-// };
-
-// seed();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const Tenant = require('./models/Tenant.js');

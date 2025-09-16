@@ -1,24 +1,21 @@
 import { useState } from 'react';
-import { upgradeTenant } from '../api/api'; // use this instead of axios
+import { upgradeTenant } from '../api/api'; 
 import { useNavigate } from 'react-router-dom';
 
 const Upgrade = () => {
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
 
   const handleUpgrade = async () => {
     try {
       const tenantSlug = localStorage.getItem('tenantSlug');
       const res = await upgradeTenant(tenantSlug);
 
-      // Backend should return updated tenant { message, plan }
       setMessage(res.data.message || 'Plan upgraded successfully');
 
-      // update frontend plan immediately
       if (res.data.plan) {
         localStorage.setItem('plan', res.data.plan);
       } else {
-        localStorage.setItem('plan', 'pro'); // fallback
+        localStorage.setItem('plan', 'pro');
       }
 
     } catch (err) {
@@ -26,9 +23,8 @@ const Upgrade = () => {
     }
   };
 
-  // Only allow Admins
   const role = localStorage.getItem('role');
-  if (role !== 'admin') {   // lowercase, matches your seeding
+  if (role !== 'admin') {   
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <p className="text-red-500 text-lg">Access denied: Admins only</p>

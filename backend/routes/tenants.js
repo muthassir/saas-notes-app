@@ -14,7 +14,6 @@ router.post('/:slug/upgrade', auth, requireAdmin, async (req, res) => {
   res.json({ message: 'Tenant upgraded to Pro', plan: tenant.plan });
 });
 
-// routes/tenants.js
 router.get('/:slug', async (req, res) => {
   const tenant = await Tenant.findOne({ slug: req.params.slug });
   if (!tenant) return res.status(404).json({ message: 'Tenant not found' });
